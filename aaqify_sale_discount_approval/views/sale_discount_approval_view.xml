@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View (Replaces Tree View in Odoo 18) -->
+    <record id="view_sale_discount_approval_tree" model="ir.ui.view">
+        <field name="name">sale.discount.approval.list</field>
+        <field name="model">sale.discount.approval</field>
+        <field name="arch" type="xml">
+            <list string="Sale Discount Approvals">
+                <field name="name"/>
+                <field name="percentage"/>
+                <field name="user_ids" widget="many2many_tags"/>
+                <field name="company_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sale_discount_approval_form" model="ir.ui.view">
+        <field name="name">sale.discount.approval.form</field>
+        <field name="model">sale.discount.approval</field>
+        <field name="arch" type="xml">
+            <form string="Sale Discount Approval">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="e.g. High Discount Rule (>5%)"/>
+                            <field name="percentage"/>
+                        </group>
+                        <group>
+                            <field name="user_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="company_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_sale_discount_approval" model="ir.actions.act_window">
+        <field name="name">Sale dist. Approval</field>
+        <field name="res_model">sale.discount.approval</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item under Sales > Configuration -->
+    <menuitem id="menu_sale_discount_approval"
+              name="Sale dist. Approval"
+              action="action_sale_discount_approval"
+              parent="sale.menu_sale_config"
+              sequence="25"/>
+</odoo>
